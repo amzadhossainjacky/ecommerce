@@ -23,9 +23,10 @@ Route::get('/admin/Change/Password','AdminController@ChangePassword')->name('adm
 Route::post('/admin/password/update','AdminController@Update_pass')->name('admin.password.update'); 
 Route::get('admin/logout', 'AdminController@logout')->name('admin.logout');
 
-    //admin routing
-//categories
 
+
+//admin routing for ecommerce
+//categories
 Route::get('admin/categories', 'Admin\Category\CategoryController@category')->name('categories');
 Route::post('admin/store/category', 'Admin\Category\CategoryController@storecategory')->name('store.category');
 Route::get('admin/delete/category/{id}', 'Admin\Category\CategoryController@deletecategory')->name('delete.category');
@@ -66,5 +67,5 @@ Route::get('admin/product/all', 'Admin\Product\ProductController@index')->name('
 Route::get('admin/product/add', 'Admin\Product\ProductController@create')->name('add.product');
 Route::post('admin/product/store', 'Admin\Product\ProductController@store')->name('store.product');
 
-//ajax sub category--
+//ajax sub category(product)--
 Route::get('get/subcategory/{category_id}', 'Admin\Product\ProductController@getSubcategory');
