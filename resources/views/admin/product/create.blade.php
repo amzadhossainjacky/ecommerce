@@ -12,7 +12,7 @@
 
     <div class="sl-pagebody">
         <div class="card pd-20 pd-sm-40">
-            <h6 class="card-body-title">Product Section <a href="#" class="btn btn-success btn-sm pull-right">All Product</a></h6>
+            <h6 class="card-body-title">Product Section <a href="{{route('all.product')}}" class="btn btn-success btn-sm pull-right">All Product</a></h6>
             <p class="mg-b-20 mg-sm-b-30">New product add form</p>
             <form action="{{route('store.product')}}" method="post" enctype="multipart/form-data">
                   @csrf
@@ -102,10 +102,17 @@
                   </div>	
                 </div>
 
+                <div class="col-lg-12">
+                  <div class="form-group">
+                    <label class="form-control-label">Video Link<span class="tx-danger">*</span></label>
+                     <input class="form-control" placeholder="video link" name="video_link">
+                  </div>	
+                </div>
+
                 <div class="col-lg-4">
                     <lebel>Image One (Main Thumbnail)<span class="tx-danger">*</span></lebel>
                     <label class="custom-file">
-                          <input type="file" id="file" class="custom-file-input" name="image_one" onchange="readURL(this);"  accept="image">
+                          <input type="file" id="file" class="custom-file-input" name="image_one" onchange="readURL(this);" required accept="image">
                           <span class="custom-file-control"></span>
                           <img src="#" id="one" >
                         </label>
@@ -113,7 +120,7 @@
                 <div class="col-lg-4">
                     <lebel>Image Two <span class="tx-danger">*</span></lebel>
                     <label class="custom-file">
-                          <input type="file" id="file" class="custom-file-input" name="image_two" onchange="readURL1(this);"  accept="image">
+                          <input type="file" id="file" class="custom-file-input" name="image_two" onchange="readURL1(this);" required  accept="image">
                           <span class="custom-file-control"></span>
                           <img src="#" id="two" >
                         </label>
@@ -121,7 +128,7 @@
                 <div class="col-lg-4">
                     <lebel>Image Three <span class="tx-danger">*</span></lebel>
                     <label class="custom-file">
-                          <input type="file" id="file" class="custom-file-input" name="image_three" onchange="readURL2(this);" accept="/image">
+                          <input type="file" id="file" class="custom-file-input" name="image_three" onchange="readURL2(this);" accept="image">
                           <span class="custom-file-control"></span>
                           <img src="#" id="three" >
                         </label>

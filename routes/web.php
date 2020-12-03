@@ -66,6 +66,15 @@ Route::post('admin/newsletter', 'Admin\FrontEndController@storeNewsletter')->nam
 Route::get('admin/product/all', 'Admin\Product\ProductController@index')->name('all.product');
 Route::get('admin/product/add', 'Admin\Product\ProductController@create')->name('add.product');
 Route::post('admin/product/store', 'Admin\Product\ProductController@store')->name('store.product');
+Route::get('admin/active/product/{id}', 'Admin\Product\ProductController@activeProduct')->name('active.product');
+Route::get('admin/inactive/product/{id}', 'Admin\Product\ProductController@inactiveProduct')->name('inactive.product');
+Route::get('admin/delete/product/{id}', 'Admin\Product\ProductController@deleteProduct')->name('delete.product');
+Route::get('admin/view/product/{id}', 'Admin\Product\ProductController@viewProduct')->name('view.product');
+Route::get('admin/edit/product/{id}', 'Admin\Product\ProductController@editProduct')->name('edit.product');
+Route::post('admin/update/product/{id}', 'Admin\Product\ProductController@updateProductWithoutImage')->name('update.product.withoutimage');
+Route::post('admin/update/productImage/{id}', 'Admin\Product\ProductController@updateProductImage')->name('update.product.image');
+
+
 
 //ajax sub category(product)--
 Route::get('get/subcategory/{category_id}', 'Admin\Product\ProductController@getSubcategory');
