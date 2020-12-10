@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+use Illuminate\Support\Facades\Hash;
+use App\User;
 class HomeController extends Controller
 {
     /**
@@ -13,7 +15,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware(['auth','verified']);
     }
 
     /**
@@ -72,7 +74,7 @@ class HomeController extends Controller
                 'messege'=>'Successfully Logout',
                 'alert-type'=>'success'
                  );
-             return Redirect()->route('login')->with($notification);
+             return Redirect()->to('/')->with($notification);
        
 
     }

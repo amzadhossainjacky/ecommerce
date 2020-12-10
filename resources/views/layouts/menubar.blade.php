@@ -19,31 +19,28 @@
 								</div>
 
 								<ul class="cat_menu">
-									<li><a href="#">Computers & Laptops <i class="fas fa-chevron-right ml-auto"></i></a></li>
-									<li><a href="#">Cameras & Photos<i class="fas fa-chevron-right"></i></a></li>
-									<li class="hassubs">
-										<a href="#">Hardware<i class="fas fa-chevron-right"></i></a>
-										<ul>
-											<li class="hassubs">
-												<a href="#">Menu Item<i class="fas fa-chevron-right"></i></a>
-												<ul>
-													<li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-													<li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-													<li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-													<li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-												</ul>
-											</li>
-											<li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-											<li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-											<li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-										</ul>
-									</li>
-									<li><a href="#">Smartphones & Tablets<i class="fas fa-chevron-right"></i></a></li>
-									<li><a href="#">TV & Audio<i class="fas fa-chevron-right"></i></a></li>
-									<li><a href="#">Gadgets<i class="fas fa-chevron-right"></i></a></li>
-									<li><a href="#">Car Electronics<i class="fas fa-chevron-right"></i></a></li>
-									<li><a href="#">Video Games & Consoles<i class="fas fa-chevron-right"></i></a></li>
-									<li><a href="#">Accessories<i class="fas fa-chevron-right"></i></a></li>
+									@php
+										$category = DB::table('categories')->get();
+									@endphp
+									@foreach ($category as $row)
+										@php
+											$subcategory = DB::table('subcategories')->where('category_id',$row->id)->get();
+										@endphp
+									
+										<li class="hassubs">
+											<a href="#">{{$row->category_name}}
+												@if (count($subcategory) == 0)
+												@else
+												 <i class="fas fa-chevron-right"></i>
+												@endif
+											</a>
+											<ul>
+												@foreach ($subcategory as $row)
+													<li><a href="#">{{$row->subcategory_name}}<i class="fas fa-chevron-right"></i></a></li>
+												@endforeach
+											</ul>
+										</li>
+									@endforeach
 								</ul>
 							</div>
 
@@ -118,7 +115,7 @@
 			</div>
 		</nav>
 		
-		<!-- Menu -->
+		<!-- Menu  mobile screen-->
 
 		<div class="page_menu">
 			<div class="container">
@@ -208,19 +205,44 @@
 		
 	</header>
 
+		@php
+			$slider = DB::table('products')
+			->join('brands', 'products.brand_id','brands.id')
+			->select('products.*', 'brands.brand_name')
+			->where('products.main_slider', 1)->orderBy('id', 'DESC')->first();
+		@endphp
+
 		<div class="banner">
 			<div class="banner_background" style="background-image:url({{asset('public/frontend/images/banner_background.jpg')}})"></div>
 			<div class="container fill_height">
 				<div class="row fill_height">
-					<div class="banner_product_image"><img src="{{asset('public/frontend/images/banner_product.png')}}" alt=""></div>
-					<div class="col-lg-5 offset-lg-4 fill_height">
-						<div class="banner_content">
-							<h1 class="banner_text">new era of smartphones</h1>
-							<div class="banner_price"><span>$530</span>$460</div>
-							<div class="banner_product_name">Apple Iphone 6s</div>
-							<div class="button banner_button"><a href="#">Shop Now</a></div>
+					@if($slider != "")
+						<div class="banner_product_image"><img src="{{asset($slider->image_one)}}" alt=""></div>
+						<div class="col-lg-5 offset-lg-4 fill_height">
+							<div class="banner_content">
+							<h1 class="banner_text">{{$slider->product_title}}</h1>
+								@if ($slider->discount_price == NULL)
+									<div class="banner_price"><h2>${{$slider->selling_price}}</h2></div>
+								@else
+									<div class="banner_price"><span>${{$slider->selling_price}}</span>${{$slider->discount_price}}</div>
+								@endif
+								
+								<div class="banner_product_name">{{$slider->brand_name}}</div>
+								<div class="button banner_button"><a href="#">Shop Now</a></div>
+							</div>
 						</div>
-					</div>
+					@else
+						<div class="banner_product_image"><img src="{{asset('public/frontend/images/banner_product.png')}}" alt=""></div>
+						<div class="col-lg-5 offset-lg-4 fill_height">
+							<div class="banner_content">
+								<h1 class="banner_text">new era of smartphones</h1>
+								<div class="banner_price"><span>$530</span>$460</div>
+								<div class="banner_product_name">Apple Iphone 6s</div>
+								<div class="button banner_button"><a href="#">Shop Now</a></div>
+							</div>
+						</div>
+					@endif
 				</div>
 			</div>
+			
 		</div>

@@ -58,9 +58,30 @@
 								</ul>
 							</div>
 							<div class="top_bar_user">
+
+								{{-- @guest
 								<div class="user_icon"><img src="{{asset('public/frontend/images/user.svg')}}" alt=""></div>
 								<div><a href="{{route('register')}}">Register</a></div>
 								<div><a href="{{route('login')}}">Sign in</a></div>
+								@else
+								<div><a href="">Profile</a></div>
+								@endguest --}}
+								<ul class="standard_dropdown top_bar_dropdown">
+									<li>
+										@guest
+										<div class="user_icon"><img src="{{asset('public/frontend/images/user.svg')}}" alt=""></div>
+										<div><a href="{{route('register')}}">Register</a></div>
+										<div><a href="{{route('login')}}">Sign in</a></div>
+										@else
+										<div><a href="{{route('home')}}">Profile</a></div>
+										<ul>
+											<li><a href="#">Wishlist</a></li>
+											<li><a href="#">Checkout</a></li>
+											<li><a href="#">Extra</a></li>
+										</ul>
+										@endguest 
+									</li>
+								</ul>
 							</div>
 						</div>
 					</div>
@@ -91,14 +112,15 @@
 										<div class="custom_dropdown">
 											<div class="custom_dropdown_list">
 												<span class="custom_dropdown_placeholder clc">All Categories</span>
+
+												@php
+													$category = DB::table('categories')->get();
+												@endphp
 												<i class="fas fa-chevron-down"></i>
 												<ul class="custom_list clc">
-													<li><a class="clc" href="#">All Categories</a></li>
-													<li><a class="clc" href="#">Computers</a></li>
-													<li><a class="clc" href="#">Laptops</a></li>
-													<li><a class="clc" href="#">Cameras</a></li>
-													<li><a class="clc" href="#">Hardware</a></li>
-													<li><a class="clc" href="#">Smartphones</a></li>
+													@foreach ($category as $row)
+													<li><a class="clc" href="#">{{$row->category_name}}</a></li>
+													@endforeach
 												</ul>
 											</div>
 										</div>

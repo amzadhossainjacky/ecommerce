@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-        <div class="wrapper without_header_sidebar">
+        {{-- <div class="wrapper without_header_sidebar">
             <!-- contnet wrapper -->
             <div class="content_wrapper">
                     <!-- page content -->
@@ -51,5 +51,42 @@
                         </div>
                     </div>
             </div><!--/ content wrapper -->
-        </div><!--/ wrapper -->
+        </div><!--/ wrapper --> --}}
+
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6 my-5">
+                    <form action="{{route('login')}}" method="post">
+                        @csrf
+                        <h2 class="text-info"> SIGN IN</h2>
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Email or Phone</label>
+                          <input type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" id="exampleInputEmail1" placeholder="email or phone" required>
+
+                          @error('email')
+                          <span class="invalid-feedback" role="alert">
+                              <strong>{{ $message }}</strong>
+                          </span>
+                          @enderror
+                        </div>
+                        <div class="form-group">
+                          <label for="exampleInputPassword1">Password</label>
+                          <input type="password" class="form-control @error('password') is-invalid @enderror" id="exampleInputPassword1" placeholder="password" name="password" required>
+
+                          @error('password')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                          @enderror
+                        </div>
+
+                        <a href="{{ route('password.request') }}" class="text-primary">I forgot my password</a><br><br>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <br> <br>
+                        <button class="btn btn-primary"> Login With Facebook</button><br><br>
+                        <button class="btn btn-danger"> Login With Google</button>
+                      </form>
+                </div>
+            </div>
+        </div>
 @endsection

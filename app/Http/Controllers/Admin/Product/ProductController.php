@@ -58,7 +58,7 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         //
-
+        
         $data = array();
         $data['product_title']= $request->product_title;
         $data['product_code']= $request->product_code;
@@ -73,7 +73,7 @@ class ProductController extends Controller
         $data['video_link']= $request->video_link;
         $data['main_slider']= $request->main_slider;
         $data['hot_deal']= $request->hot_deal;
-        $data['best_rated']= $request->trend;
+        $data['best_rated']= $request->best_rated;
         $data['trend']= $request->trend;
         $data['mid_slider']= $request->mid_slider;
         $data['hot_new']= $request->hot_new;
@@ -275,7 +275,7 @@ class ProductController extends Controller
         $data['video_link']= $request->video_link;
         $data['main_slider']= $request->main_slider;
         $data['hot_deal']= $request->hot_deal;
-        $data['best_rated']= $request->trend;
+        $data['best_rated']= $request->best_rated;
         $data['trend']= $request->trend;
         $data['mid_slider']= $request->mid_slider;
         $data['hot_new']= $request->hot_new;

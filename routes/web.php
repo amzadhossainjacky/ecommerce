@@ -1,12 +1,15 @@
 <?php
 
-Route::get('/', function () {return view('pages.index');});
+//Route::get('/', function () {});
+
+Route::get('/', 'FrontendController@index');
 
 //auth & user
-Auth::routes();
+Auth::routes(['verify' => true]);
+
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/password-change', 'HomeController@changePassword')->name('password.change');
-Route::post('/password-update', 'HomeController@updatePassword')->name('password.update');
+Route::get('/password/change', 'HomeController@changePassword')->name('password.change');
+Route::post('/password/update', 'HomeController@updatePassword')->name('password.update');
 Route::get('/user/logout', 'HomeController@Logout')->name('user.logout');
 
 //admin=======
@@ -22,7 +25,6 @@ Route::post('admin/update/reset', 'Admin\ResetPasswordController@reset')->name('
 Route::get('/admin/Change/Password','AdminController@ChangePassword')->name('admin.password.change');
 Route::post('/admin/password/update','AdminController@Update_pass')->name('admin.password.update'); 
 Route::get('admin/logout', 'AdminController@logout')->name('admin.logout');
-
 
 
 //admin routing for ecommerce
@@ -75,6 +77,10 @@ Route::post('admin/update/product/{id}', 'Admin\Product\ProductController@update
 Route::post('admin/update/productImage/{id}', 'Admin\Product\ProductController@updateProductImage')->name('update.product.image');
 
 
-
 //ajax sub category(product)--
 Route::get('get/subcategory/{category_id}', 'Admin\Product\ProductController@getSubcategory');
+
+
+
+//user profile with mail verification
+

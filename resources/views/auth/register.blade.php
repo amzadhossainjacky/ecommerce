@@ -75,7 +75,7 @@
     </div>
 </div> --}}
 
-        <div class="wrapper without_header_sidebar">
+        {{-- <div class="wrapper without_header_sidebar">
             <!-- contnet wrapper -->
             <div class="content_wrapper">
                 <!-- page content -->
@@ -134,5 +134,64 @@
                     </div>
                 </div>
             </div><!--/ content wrapper -->
-        </div><!--/ wrapper -->
+        </div><!--/ wrapper --> --}}
+
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6 my-5">
+                    <form action="{{route('register')}}" method="post">
+                        @csrf
+                        <h2 class="text-info"> SIGN UP</h2>
+                        <div class="form-group">
+                            <label for="fullname">Full Name</label>
+                            <input type="text" class="form-control  @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" id="fullname" placeholder="full name" required>
+
+                            @error('name')
+                            <span class="invalid-feedback" role="alert">
+                              <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Email</label>
+                          <input type="text" class="form-control  @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" id="exampleInputEmail1" placeholder="email" required>
+
+                          @error('email')
+                          <span class="invalid-feedback" role="alert">
+                              <strong>{{ $message }}</strong>
+                          </span>
+                          @enderror
+                        </div>
+                        <div class="form-group">
+                          <label for="phone">Phone</label>
+                          <input type="text" class="form-control @error('phone') is-invalid @enderror" id="phone" placeholder="phone" name="phone" required>
+
+                          @error('phone')
+                          <span class="invalid-feedback" role="alert">
+                              <strong>{{ $message }}</strong>
+                          </span>
+                          @enderror
+                        </div>
+
+                        <div class="form-group">
+                          <label for="exampleInputPassword1">Password</label>
+                          <input type="password" class="form-control @error('password') is-invalid @enderror" id="exampleInputPassword1" placeholder="password" name="password" required>
+
+                          @error('password')
+                          <span class="invalid-feedback" role="alert">
+                              <strong>{{ $message }}</strong>
+                          </span>
+                          @enderror
+                        </div>
+
+                        <div class="form-group">
+                          <label for="exampleInputPassword1">Confirm Password</label>
+                          <input type="password" class="form-control" id="exampleInputPassword1" placeholder="re-type password" name="password_confirmation" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Sign UP</button>
+                      </form>
+                </div>
+            </div>
+        </div>
 @endsection
