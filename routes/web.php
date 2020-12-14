@@ -76,11 +76,14 @@ Route::get('admin/edit/product/{id}', 'Admin\Product\ProductController@editProdu
 Route::post('admin/update/product/{id}', 'Admin\Product\ProductController@updateProductWithoutImage')->name('update.product.withoutimage');
 Route::post('admin/update/productImage/{id}', 'Admin\Product\ProductController@updateProductImage')->name('update.product.image');
 
+//wishlist
+Route::get('add/wishlist/{id}', 'WishlistController@addWishlist')->name('addWishlist');
 
 //ajax sub category(product)--
 Route::get('get/subcategory/{category_id}', 'Admin\Product\ProductController@getSubcategory');
 
-
-
+//add to cart 
+Route::get('add/to/cart/{id}', 'CartController@addCart')->name('addCart');
+Route::get('check', 'CartController@check')->name('check');
 //user profile with mail verification
 

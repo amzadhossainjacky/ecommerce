@@ -33,7 +33,7 @@
             <div class="card text-center" style="width: 18rem;">
                 <img src="{{asset('public/backend/img/profile.jpg')}}" class="card-img-top w-50 m-auto rounded-circle pt-3" alt="">
                 <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
+                  <h5 class="card-title">{{Auth::User()->name}}</h5>
                 </div>
                 <ul class="list-group list-group-flush">
                   <li class="list-group-item"><a href="{{route('password.change')}}">Password Change</a></li>
