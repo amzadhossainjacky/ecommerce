@@ -85,5 +85,17 @@ Route::get('get/subcategory/{category_id}', 'Admin\Product\ProductController@get
 //add to cart 
 Route::get('add/to/cart/{id}', 'CartController@addCart')->name('addCart');
 Route::get('check', 'CartController@check')->name('check');
+Route::get('products/cart', 'CartController@showCart')->name('show.cart');
+Route::get('product/remove/{rowId}','CartController@removeCart')->name('remove.cart');
+Route::post('product/update/{rowId}','CartController@updateCart')->name('update.cart');
+
+//product details
+Route::get('product/details/{id}/{product_title}', 'ProductDetailsController@productView')->name('product.detail');
+//Route::post('cart/product/add/{id}', 'ProductDetailsController@addToCart'); //not ajax use and come from product details page
+Route::get('cart/product/view/{id}', 'ProductDetailsController@cartProductView');
+Route::post('cart/product/add', 'ProductDetailsController@addToCart')->name('add.product.cart');
+
+
+
 //user profile with mail verification
 

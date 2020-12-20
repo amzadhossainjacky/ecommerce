@@ -19,10 +19,12 @@ class CartController extends Controller
             $data = array();
             $data['id'] = $product->id;
             $data['name'] = $product->product_title;
-            $data['qty'] = $product->product_quantity;
+            $data['qty'] = 1;
             $data['price'] = $product->selling_price;
             $data['weight'] = 1;
             $data['options']['image'] = $product->image_one;
+            $data['options']['color'] ="";
+            $data['options']['size'] = "";
             Cart::add($data);
             return response()->json(['success' => 'Successfully added on your cart!']);
         }else{
@@ -30,10 +32,12 @@ class CartController extends Controller
             $data = array();
             $data['id'] = $product->id;
             $data['name'] = $product->product_title;
-            $data['qty'] = $product->product_quantity;
+            $data['qty'] = 1;
             $data['price'] = $product->discount_price;
             $data['weight'] = 1;
             $data['options']['image'] = $product->image_one;
+            $data['options']['color'] ="";
+            $data['options']['size'] = "";
             Cart::add($data);
             return response()->json(['success' => 'Successfully added on your cart!']);
         }
@@ -43,5 +47,23 @@ class CartController extends Controller
 
         $data = Cart::content();
         return response()->json($data);
+    }
+
+    public function showCart(){
+
+        $cart = Cart::content();
+        return view('pages.show_cart', compact('cart'));
+    }
+
+    public function removeCart($rowId){
+        Cart::remove($rowId);
+        return redirect()->back();
+    }
+
+    public function updateCart(Request $request, $rowId){
+        
+        $qty = $request->qty;
+        Cart::update($rowId, $qty);
+        return redirect()->back();
     }
 }
